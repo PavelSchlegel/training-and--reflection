@@ -31,7 +31,7 @@ struct Struct {
         explicit Struct(int hull) {
             std::ifstream fs;
             // int lenght = 0;
-            fs.open(s_file);
+            fs.open(s_file, std::ios::ate);
             if (fs.is_open()) {
                 std::getline(fs, s_str);
                 fs.close();
