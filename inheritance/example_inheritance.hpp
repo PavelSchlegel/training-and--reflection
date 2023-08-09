@@ -11,6 +11,8 @@ class X {
 
 class Y : public X {
     public:
+    //при создании Y метод будет вызван у род.
+    //если предостааили свой, то выполниться дочерний
         void i_am() {
             std::cout << "I am Y" << std::endl;
         }

@@ -5,7 +5,7 @@ project(reflection LANGUAGES CXX)
 # read_write_file/CPP/read_write.cpp
 # )
 
-add_executable(reflection main.cpp inheritance/example_inheritance.hpp)
+add_executable(reflection main.cpp struct/struct.hpp)
 
 set_target_properties(reflection
         PROPERTIES
