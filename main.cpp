@@ -3,8 +3,7 @@
 #include "struct/struct.hpp"
 
 int main() {
-    std::string S{"Hello!"};
-    Struct B(S);
-    Struct A("World is beautiful!");
+    Struct A(0);
+    // Struct A("Hello, world!");
     return 0;
 }
