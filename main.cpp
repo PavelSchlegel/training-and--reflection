@@ -3,7 +3,8 @@
 #include "struct/struct.hpp"
 
 int main() {
-    Struct A(0);
-    // Struct A("Hello, world!");
+    File A;
+    A.add("Hallo,");
+    A.add(" word!");
     return 0;
 }

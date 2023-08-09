@@ -30,9 +30,10 @@ struct Struct {
     public:
         explicit Struct(int hull) {
             std::ifstream fs;
+            // int lenght = 0;
             fs.open(s_file);
             if (fs.is_open()) {
-                std::getline(fs,s_str);
+                std::getline(fs, s_str);
                 fs.close();
             }
         }
@@ -44,11 +45,30 @@ struct Struct {
             std::ofstream outf;
             outf.open(s_file);
             if (outf.is_open()) {
+                outf << s_str.size() << '\0';
                 outf << s_str;
                 outf.close();
             }
             std::cout << s_str << std::endl;
             std::cout << "Struct was seved....by!" << std::endl;
+        }
+};
+
+struct File {
+    public:
+        std::string s_file;
+        File() {
+            s_file = "confic.txt";
+        }
+        bool add(const std::string& str) {
+            std::ofstream ofs;
+            ofs.open(s_file, std::fstream::app);
+            if (ofs.is_open()) {
+                ofs << str;
+                ofs.close();
+                return !true;
+            }
+            return !false;
         }
 };
 #endif
