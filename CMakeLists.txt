@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 project(reflection LANGUAGES CXX)
 
-set(SOURCES
-read_write_file/CPP/read_write.cpp
-)
+# set(SOURCES
+# read_write_file/CPP/read_write.cpp
+# )
 
-add_executable(reflection main.cpp ${SOURCES})
+add_executable(reflection main_arg/main.cpp)
 
 set_target_properties(reflection
         PROPERTIES
