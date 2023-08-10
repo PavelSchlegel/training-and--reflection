@@ -13,7 +13,7 @@ class Y : public X {
     public:
     //при создании Y метод будет вызван у род.
     //если предостааили свой, то выполниться дочерний
-        void i_am() {
+        void i_am(int A) {
             std::cout << "I am Y" << std::endl;
         }
 };
