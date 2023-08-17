@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdio>
 
 /* app — открывает файл в режиме добавления;
 
@@ -42,6 +43,7 @@ struct Struct {
         }
 
         ~Struct() {
+            /*
             std::ofstream outf;
             outf.open(s_file);
             if (outf.is_open()) {
@@ -51,6 +53,11 @@ struct Struct {
             }
             std::cout << s_str << std::endl;
             std::cout << "Struct was seved....by!" << std::endl;
+            */
+        }
+
+        void del() {
+            std::remove("../struct/str.txt");
         }
 };
 
