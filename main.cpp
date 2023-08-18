@@ -9,7 +9,14 @@ void example(int A) {
 
 int main()
 {
-    std::packaged_task<void(int)> T(example);
-    T(5);
+    std::vector<void(*)(int A)> X(5, example);
+    for (const auto rec : X) {
+        rec(1);
+    }
+
+    std::vector<int> D(5, 4);
+    for (std::cout << "exampple:"; auto rec : D) {
+        std::cout << rec << std::endl;
+    }
     return 0;
 }
