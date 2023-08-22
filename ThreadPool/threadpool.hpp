@@ -2,6 +2,7 @@
 #define TRHEADPOOL
 
 #include "headers.hpp"
+#include "blockedqueue.hpp"
 
 #define T_SIZE 4
 
@@ -12,15 +13,19 @@ using func_ptr = void (*) (std::size_t, std::size_t);
 class Thread_Pool
 {
 public:
+    Thread_Pool();
     void start();
     void stop();
     void push_task(func_ptr, std::size_t A, std::size_t B);
-    void thread_func();
+    void thread_func(std::size_t qindex);
 private:
+    std::size_t _thread_count;
     std::vector<std::thread> _threads;
-    std::mutex _mutex;
-    std::queue<task_type> _task_queue;
-    std::condition_variable _event_holder;
-    bool _work;
+    std::vector<BlockedQueue<task_type>> _thread_queues;
+    std::size_t _index;
+    // std::mutex _mutex;
+    // std::queue<task_type> _task_queue;
+    // std::condition_variable _event_holder;
+    // bool _work;
 };
 #endif
