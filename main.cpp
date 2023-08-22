@@ -9,14 +9,14 @@ void example(int A) {
 
 int main()
 {
-    std::vector<void(*)(int A)> X(5, example);
-    for (const auto rec : X) {
-        rec(1);
+    std::vector<int> D;
+    for (std::size_t i = 0; i < 5; ++i) {
+        std::cout << D.emplace_back(i);
     }
-
-    std::vector<int> D(5, 4);
-    for (std::cout << "exampple:"; auto rec : D) {
-        std::cout << rec << std::endl;
+    /*
+    for (std::size_t i = 0; i < 5; ++i) {
+        std::cout << D[i] << " ";
     }
+    */
     return 0;
 }
