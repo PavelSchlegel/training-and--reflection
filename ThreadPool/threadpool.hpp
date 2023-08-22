@@ -1,9 +1,7 @@
 #ifndef TRHEADPOOL
 #define TRHEADPOOL
-#include <queue>
-#include <future>
-#include <condition_variable>
-#include <vector>
+
+#include "headers.hpp"
 
 #define T_SIZE 4
 

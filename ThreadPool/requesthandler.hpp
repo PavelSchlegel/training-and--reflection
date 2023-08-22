@@ -1,6 +1,6 @@
 #include "threadpool.hpp"
 
-class RequestHandler {
+class RequestHandler { //трансмиттер-приемник
    public:
        RequestHandler();
        ~RequestHandler();

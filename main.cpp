@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include <future>
+#include <functional>
 
 void example(int A) {
     std::cout << A << std::endl;
@@ -9,14 +10,11 @@ void example(int A) {
 
 int main()
 {
-    std::vector<int> D;
-    for (std::size_t i = 0; i < 5; ++i) {
-        std::cout << D.emplace_back(i);
+    std::function<void()> A;
+    if (A) {
+        std::cout << "OK" << std::endl;
+    } else {
+        std::cout << "Not ok" << std::endl;
     }
-    /*
-    for (std::size_t i = 0; i < 5; ++i) {
-        std::cout << D[i] << " ";
-    }
-    */
     return 0;
 }

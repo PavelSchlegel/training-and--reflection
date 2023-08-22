@@ -22,6 +22,7 @@ void Thread_Pool::stop()
 {
     std::unique_lock<std::mutex> M(_mutex);
     _work = false;
+    _event_holder.notify_all();
     for (auto& rec : _threads) {
         if (rec.joinable()) {
             rec.join();
