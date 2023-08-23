@@ -12,7 +12,7 @@ private:
 public:
    void push(T& item){
        std::lock_guard<std::mutex> l(m_locker);
-       m_task_queue.push(item);
+       m_task_queue.push(std::move(item));
        m_notifier.notify_one();
    }
 
@@ -21,7 +21,7 @@ public:
        if (m_task_queue.empty()) {
            m_notifier.wait(l, [this]{return !m_task_queue.empty();});
        }
-       item = m_task_queue.front();
+       item = std::move(m_task_queue.front());
        m_task_queue.pop();
    }
 
@@ -30,7 +30,7 @@ public:
        if(m_task_queue.empty()) {
            return false;
        }
-       item = m_task_queue.front();
+       item = std::move(m_task_queue.front());
        m_task_queue.pop();
        return true;
    }

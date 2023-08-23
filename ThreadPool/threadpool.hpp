@@ -7,7 +7,9 @@
 #define T_SIZE 4
 
 void func(std::size_t A, std::size_t B);
-using task_type = std::function<void()>;
+using task_type = std::packaged_task<void()>;
+using res_type = std::future<void>;
+// using task_type = std::function<void()>;
 using func_ptr = void (*) (std::size_t, std::size_t);
 
 class Thread_Pool
@@ -16,7 +18,7 @@ public:
     Thread_Pool();
     void start();
     void stop();
-    void push_task(func_ptr, std::size_t A, std::size_t B);
+    res_type push_task(func_ptr, std::size_t A, std::size_t B);
     void thread_func(std::size_t qindex);
 private:
     std::size_t _thread_count;

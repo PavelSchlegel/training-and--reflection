@@ -51,14 +51,16 @@ void Thread_Pool::stop()
     */
 }
 
-void Thread_Pool::push_task(func_ptr F, std::size_t A, std::size_t B)
+res_type Thread_Pool::push_task(func_ptr F, std::size_t A, std::size_t B)
 {
     // вычисляем индекс очереди, куда положим задачу
     int queue_to_push = _index++ % _thread_count;
     // формируем функтор
-    task_type task = [=]{F(A, B);};
+    task_type task ([=]{F(A, B);});
+    auto res = task.get_future();
     // кладем в очередь
     _thread_queues[queue_to_push].push(task);
+    return res;
     /*
     std::lock_guard<std::mutex> M(_mutex);
     task_type new_task([=](){F(A, B);});
@@ -74,14 +76,15 @@ void Thread_Pool::thread_func(std::size_t qindex)
        bool res;
        int i = 0;
        for(; i < _thread_count; ++i) {
-           if(res = _thread_queues[(qindex + i) % _thread_count].fast_pop(task_to_do)) {
-               break;
-           }
+            res = _thread_queues[(qindex + i) % _thread_count].fast_pop(task_to_do);
+            if(res) {
+                break;
+            }
        }
 
        if (!res) {
            _thread_queues[qindex].pop(task_to_do);
-       } else if (!task_to_do) {
+       } else if (task_to_do.) {
            _thread_queues[(qindex + i) % _thread_count].push(task_to_do);
        }
        if (!task_to_do) {
