@@ -30,8 +30,12 @@ void quicksort(int a[], int start, int end)
     }
  
     int pivot = partition(a, start, end);
-    q_sort.push_task(quicksort, a, start, pivot - 1);
-    // quicksort(a, start, pivot - 1);
+    if (pivot - start > 100000) {
+        q_sort.push_task(quicksort, a, start, pivot - 1);
+        quicksort(a, pivot + 1, end);
+        return;
+    }
+    quicksort(a, start, pivot - 1);
     quicksort(a, pivot + 1, end);
 }
 
