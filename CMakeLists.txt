@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.12)
 project(reflection LANGUAGES CXX)
 
-# set(SOURCES
-# read_write_file/CPP/read_write.cpp
-# )
+set(SOURCES
+        Qsort_Pool/threadpool.cpp
+        Qsort_Pool/threadpool.hpp
+        Qsort_Pool/headers.hpp
+        Qsort_Pool/blockedqueue.hpp
+)
 
-add_executable(reflection main.cpp struct/struct.hpp)
+add_executable(reflection main.cpp ${SOURCES})
 
 set_target_properties(reflection
         PROPERTIES

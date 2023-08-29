@@ -84,7 +84,7 @@ void Thread_Pool::thread_func(std::size_t qindex)
 
        if (!res) {
            _thread_queues[qindex].pop(task_to_do);
-       } else if (task_to_do.) {
+       } else if (!task_to_do) {
            _thread_queues[(qindex + i) % _thread_count].push(task_to_do);
        }
        if (!task_to_do) {
