@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -50,5 +51,14 @@ int main()
         std::cout << a[i] << " ";
     }
 
+    return 0;
+}
+*/
+
+#include <mylib.hpp>
+
+int main()
+{
+    std::cout << return_one() << std::endl;
     return 0;
 }
