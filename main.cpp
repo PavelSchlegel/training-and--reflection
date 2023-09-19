@@ -1,64 +1,43 @@
-/*
 #include <iostream>
 #include <vector>
 #include <thread>
 #include <future>
 #include <functional>
 #include "Qsort_Pool/threadpool.hpp"
+// #include <mylib.hpp>
+#include "new_lib/new_lib.hpp"
 
-Thread_Pool q_sort;
-
-int partition(int a[], int start, int end)
+int main()
 {
-    int pivot = a[end];
-    int pIndex = start;
-    for (int i = start; i < end; i++)
+    boost::json::object O;                      // пустой объект
+    // сария вызывов для вставки
+    O["id"] = 1;                                // insert a int
+    O[ "pi" ] = 3.141;                          // insert a double
+    O[ "happy" ] = true;                        // insert a bool
+    O[ "name" ] = "Boost";                      // insert a string
+    // std::cout << O << std::endl;
+    /*Вместо того, чтобы создавать документ JSON с помощью серии вызовов функций, 
+    можно создать его в одном операторе, используя список инициализаторов:*/
+
+    boost::json::value value = {
+                                {"id", 2},
+                                {"pi", 3.141},
+                                {"happy", true},
+                                {"name", "Boost"}
+                                };
+    boost::json::object A = {{"id", 2}};
+    std::cout << value << std::endl;
+    // std::cout << A << std::endl;
+    boost::json::value C = boost::json::parse("[1, 2, 3]");
+    // std::cout << C << std::endl;
+    std::string serial = boost::json::serialize(value);
+    // std::cout << serial << std::endl;
+    boost::json::serializer sr;
+    sr.reset(&value);
+    do
     {
-        if (a[i] <= pivot)
-        {
-            std::swap(a[i], a[pIndex]);
-            pIndex++;
-        }
-    }
-    std::swap (a[pIndex], a[end]);
-    return pIndex;
-}
-
-void quicksort(int a[], int start, int end)
-{
-    if (start >= end) {
-        return;
-    }
- 
-    int pivot = partition(a, start, end);
-    if (pivot - start > 100000) {
-        q_sort.push_task(quicksort, a, start, pivot - 1);
-        quicksort(a, pivot + 1, end);
-        return;
-    }
-    quicksort(a, start, pivot - 1);
-    quicksort(a, pivot + 1, end);
-}
-
-int main()
-{
-    int a[] = { 9, -3, 5, 2, 6, 8, -6, 1, 3 };
-    int n = sizeof(a)/sizeof(a[0]);
-    q_sort.start();
-    q_sort.push_task(quicksort, a, 0, n - 1).get();
-    q_sort.stop();
-    for (int i = 0; i < n; i++) {
-        std::cout << a[i] << " ";
-    }
-
-    return 0;
-}
-*/
-
-#include <mylib.hpp>
-
-int main()
-{
-    std::cout << return_one() << std::endl;
+        char buf[20];
+        std::cout << sr.read(buf) << std::endl;
+    } while (! sr.done());
     return 0;
 }

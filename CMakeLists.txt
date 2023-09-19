@@ -1,16 +1,24 @@
 cmake_minimum_required(VERSION 3.12)
 project(reflection LANGUAGES CXX)
 
+# include(FetchContent)
+# enable_testing()
+
+# FetchContent_Declare(
+#     googletest
+#     URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
+# )
+# FetchContent_MakeAvailable(googletest)
+
 include(FetchContent)
-enable_testing()
 
 FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
+    boost
+    URL https://github.com/boostorg/boost/releases/download/boost-1.83.0/boost-1.83.0.tar.gz
 )
-FetchContent_MakeAvailable(googletest)
+FetchContent_MakeAvailable(boost)
 
-add_subdirectory(mylib)
+add_subdirectory(new_lib)
 
 # set(SOURCES
         # Qsort_Pool/threadpool.cpp
@@ -20,7 +28,7 @@ add_subdirectory(mylib)
 # )
 
 add_executable(reflection main.cpp)
-target_link_libraries(reflection PUBLIC mylib)
+target_link_libraries(reflection PUBLIC Boost::headers new_lib)
 
 set_target_properties(reflection
         PROPERTIES
