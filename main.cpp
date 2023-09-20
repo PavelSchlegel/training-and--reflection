@@ -13,40 +13,49 @@ int get_int()
 
 int main()
 {
-    // boost::json::object O;                      // пустой объект
-    // // сария вызывов для вставки
-    // O[get()] = get_int();                                // insert a int
-    // O[ "pi" ] = 3.141;                          // insert a double
-    // O[ "happy" ] = true;                        // insert a bool
-    // O[ "name" ] = "Boost";                      // insert a string
-    // std::cout << O << std::endl;
-    /*Вместо того, чтобы создавать документ JSON с помощью серии вызовов функций, 
-    можно создать его в одном операторе, используя список инициализаторов:*/
+    using namespace boost::json;
+    std::string _str {"string_string"};
 
-    // boost::json::value value = {
-    //                             {"id", 2},
-    //                             {"pi", 3.141},
-    //                             {"happy", true},
-    //                             {"name", "Boost"}
-    //                             };
-    // boost::json::object A = {{"id", 2}};
-    // std::cout << value << std::endl;
-    // // std::cout << A << std::endl;
-    // boost::json::value C = boost::json::parse("[1, 2, 3]");
-    // // std::cout << C << std::endl;
-    // std::string serial = boost::json::serialize(value);
-    // // std::cout << serial << std::endl;
-    // boost::json::serializer sr;
-    // sr.reset(&value);
-    // do
-    // {
-    //     char buf[20];
-    //     std::cout << sr.read(buf) << std::endl;
+    struct Mystruct {
+        int _id = 1;
+        std::string _str {"default"};
+    };
 
-    // } while (! sr.done());
-    // boost::json::value F = boost::json::parse(serial);
-    // test_json();
-    // std::cout << O << std::endl;
-    test_json();
+    Mystruct A;
+    // value V {{"id", A._id}, {"str", A._str}};
+    // if (V.is_object()) {
+    //     std::cout << V << std::endl;
+    // }
+    // value B = string(_str);
+    // if (B.is_array()) {
+    //     std::cout << B << std::endl;
+    // }
+    // std::cout << B << std::endl;
+
+    object N {{"id", A._id}, {"str", A._str}};
+
+    char buf[200];
+    serializer R;
+    R.reset(&N);
+    do {
+        R.read(buf);
+    } while (! R.done());
+
+    stream_parser p;
+    error_code ec;
+    p.reset();
+    p.write( buf, ec );
+    // if( ! ec )
+    //     p.write( ", 3]", ec );
+    if( ! ec )
+        p.finish( ec );
+    if( ec ) {
+        std::cout << ec.what() << std::endl;
+    }
+
+    value jv = p.release();
+
+    std::cout << jv << std::endl;
+
     return 0;
 }

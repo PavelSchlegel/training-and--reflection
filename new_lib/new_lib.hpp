@@ -41,18 +41,56 @@ inline std::string get()
     return line;
 }
 
+inline void test_two()
+{
+    boost::json::value json {
+                            {"key", 2},
+                            {"id", 4},
+                            {"str", "string"}
+                            };
+    boost::json::serializer sr;
+    sr.reset(&json);
+    // do
+    // {
+        char buf[10];
+        // std::cout << sr.read(buf) << std::endl;
+        sr.read(buf);
+        boost::json::value A = boost::json::parse(buf);
+        for (std::size_t i = 0; i < 10; ++i) {
+            std::cout << buf[i];
+        }
+
+    // } while (! sr.done());
+}
+
 inline void test_json()
 {
-    // boost::json::value json {
-    //                         {"key", 2},
-    //                         {"id", 4},
-    //                         {"str", "string"}
-    //                         };
-    boost::json::object O {
-                        {"id", 1},
-                        {"key", "string"}
-                        };
-    auto it = O.find("id");
-    std::cout << it->value() << std::endl;
-    std::cout << O.find("key")->value() << std::endl;
+    // using namespace boost::json;
+    // boost::json::object O {
+    //                     {"id", 1},
+    //                     {"key", "string"}
+    //                     };
+    // boost::json::serializer sr;
+    // sr.reset(&O);
+    // // do {
+        
+    //     char buf[20];
+    //     sr.read(buf);
+    //     // boost::json::value A = boost::json::parse(buf);
+    //     for (std::size_t i = 0; i < 20; ++i) {
+    //         std::cout << buf[i];
+    //     }
+    // // } while ( ! sr.done());
+    // stream_parser p;
+    // error_code ec;
+    // p.reset();
+    // p.write(buf, 20, ec);
+    // // if( ! ec )
+    // //     p.write( ", 3]", ec );
+    // if( ! ec )
+    //     p.finish( ec );
+    // if( ec )
+    //     std::cout << ec.what() << std::endl;
+    // value jv = p.release();
+    //     std::cout << jv << std::endl;
 }
