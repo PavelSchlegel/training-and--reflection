@@ -19,7 +19,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(boost)
 
 add_subdirectory(new_lib)
-
+# add_subdirectory(pass)
 # set(SOURCES
         # Qsort_Pool/threadpool.cpp
         # Qsort_Pool/threadpool.hpp
@@ -28,7 +28,7 @@ add_subdirectory(new_lib)
 # )
 
 add_executable(reflection main.cpp)
-target_link_libraries(reflection PUBLIC Boost::headers new_lib)
+target_link_libraries(reflection PUBLIC Boost::headers new_lib )
 
 set_target_properties(reflection
         PROPERTIES
